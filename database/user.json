@@ -1,0 +1,11 @@
+[
+  {
+    "username": "user3",
+    "email": "dwiputrawibowo2009@gmail.com",
+    "password": "321",
+    "role": "user",
+    "verified": true,
+    "uploadsPath": "./public/database/user3",
+    "cookies": "ac513194-0db2-4298-9ad4-a9dd2b47ec81"
+  }
+]

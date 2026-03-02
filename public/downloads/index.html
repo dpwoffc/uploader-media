@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Media Uploader Download</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#f4f7ff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+  background:#0d6efd;
+  color:white;
+  padding:18px 25px;
+}
+
+.header h2{
+  font-weight:600;
+}
+
+/* CONTENT */
+
+.container{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+}
+
+.card{
+  width:100%;
+  max-width:500px;
+  background:white;
+  border-radius:12px;
+  padding:30px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  text-align:center;
+}
+
+.file-icon{
+  font-size:60px;
+  margin-bottom:10px;
+}
+
+.file-name{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:5px;
+  word-break:break-all;
+}
+
+.file-size{
+  color:#666;
+  margin-bottom:20px;
+}
+
+.btn-download{
+  background:#0d6efd;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn-download:hover{
+  background:#0b5ed7;
+}
+
+.error{
+  color:red;
+  font-weight:500;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Media Uploader Download</h2>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="file-icon">📁</div>
+
+<div class="file-name" id="fileName">
+Loading...
+</div>
+
+<div class="file-size" id="fileSize"></div>
+
+<button id="downloadBtn" class="btn-download">
+Download
+</button>
+
+<div id="error" class="error"></div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

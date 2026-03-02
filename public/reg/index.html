@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: #ffff;;
+}
+
+.glass-container{
+  width:100%;
+  max-width:400px;
+  padding:40px 30px;
+  border-radius:20px;
+  backdrop-filter:blur(25px);
+  background:rgba(255,255,255,0.25);
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+  border:1px solid rgba(255,255,255,0.3);
+}
+
+h2{
+  text-align:center;
+  margin-bottom:25px;
+  color:#0d6efd;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  outline:none;
+  background:skyblue;
+}
+
+input:focus{
+  background:white;
+  box-shadow:0 0 0 2px #0d6efd;
+}
+
+.btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:#0d6efd;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.btn:hover{
+  background:#084298;
+}
+
+#otpSection{
+  display:none;
+  margin-top:20px;
+}
+
+.link{
+  text-align:center;
+  margin-top:15px;
+}
+
+.link a{
+  color:#0d6efd;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="glass-container">
+
+  <h2>Create Account</h2>
+
+  <form id="registerForm">
+    <div class="input-group">
+      <input id="username" type="text" placeholder="Full Name" required>
+    </div>
+    <div class="input-group">
+      <input id="email" type="email" placeholder="Email (@gmail.com)" required>
+    </div>
+    <div class="input-group">
+      <input id="password" type="password" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn">Register</button>
+  </form>
+
+  <div id="otpSection">
+    <div class="input-group">
+      <input id="otpInput" type="text" placeholder="Masukkan OTP">
+    </div>
+    <button id="verifyBtn" class="btn">Verify OTP</button>
+  </div>
+
+  <div class="link">
+    Already have account? <a href="../login/index.html">Login</a>
+  </div>
+  <div class="link">
+    Back to Home <a href="../index.html">Home</a>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+(async ()=>{
+  const res = await fetch("/api/check-session");
+  const data = await res.json();
+
+  if(data.logged){
+    location.href="/users/index.html";
+  }
+})();
+</script>
+</body>
+</html>

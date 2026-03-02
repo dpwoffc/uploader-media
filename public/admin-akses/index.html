@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  display:flex;
+  min-height:100vh;
+  background:#f4f7ff;
+}
+
+.sidebar{
+  width:250px;
+  background:#0d6efd;
+  color:white;
+  padding:25px 20px;
+  transition:0.3s ease;
+}
+
+.sidebar h2{
+  margin-bottom:30px;
+}
+
+.sidebar ul{
+  list-style:none;
+}
+
+.sidebar ul li{
+  margin-bottom:18px;
+}
+
+.sidebar ul li a{
+  text-decoration:none;
+  color:white;
+  display:block;
+  padding:10px;
+  border-radius:8px;
+  transition:0.2s;
+}
+
+.sidebar ul li a:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+  background:#0d6efd;
+  color:white;
+  padding:16px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.hamburger{
+  font-size:22px;
+  cursor:pointer;
+  display:none;
+}
+
+/* CONTENT */
+
+.content{
+  flex:1;
+  padding:30px;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.card h3{
+  font-size:26px;
+  margin-bottom:15px;
+  color:#0d6efd;
+}
+
+.card p{
+  font-size:16px;
+  color:#555;
+  max-width:500px;
+  line-height:1.6;
+}
+
+/* OVERLAY */
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.3);
+  display:none;
+  z-index:900;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .sidebar{
+    position:fixed;
+    left:-260px;
+    top:0;
+    height:100%;
+    z-index:1000;
+  }
+
+  .sidebar.active{
+    left:0;
+  }
+
+  .hamburger{
+    display:block;
+  }
+
+  .overlay.active{
+    display:block;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="sidebar" id="sidebar">
+  <h2>ADMIN</h2>
+  <ul>
+    <li><a href="#" class="menu-link">Dashboard</a></li>
+    <li><a href="./crudUser/index.html" class="menu-link">CRUD</a></li>
+    <li><a href="#" id="logoutBtn" class="menu-link">Logout</a></li>
+  </ul>
+</div>
+
+<div class="main">
+
+  <div class="header">
+    <div class="hamburger" id="hamburger">☰</div>
+    <h2>ADMIN DASHBOARD</h2>
+  </div>
+
+  <div class="content">
+
+    <div class="card">
+      <h3>Selamat Datang Admin 👋</h3>
+
+      <p>
+        Silahkan gunakan fitur <b>CRUD User</b> yang tersedia pada menu sidebar
+        untuk mengelola data pengguna yang ada di sistem.
+      </p>
+
+      <p style="margin-top:10px;">
+        Anda dapat melakukan <b>Read, Update, dan Delete</b> data user
+        dengan mudah melalui halaman tersebut.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
