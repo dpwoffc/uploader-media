@@ -22,16 +22,28 @@ menuLinks.forEach(link => {
 
 /* SESSION & CURRENT USER */
 let currentUser = "";
+
 (async () => {
   try {
     const res = await fetch("/api/check-session", { credentials:"include" });
     const data = await res.json();
-    if(!data.logged || data.role !== "user") location.href = "/login/index.html";
 
-    const userRes = await fetch("/api/users", { credentials:"include" });
-    const userData = await userRes.json();
-    const sessionUser = userData.find(u => u.cookies);
-    if(sessionUser) currentUser = sessionUser.username;
+    if(!data.logged || data.role !== "user"){
+      location.href = "/login/index.html";
+      return;
+    }
+
+    if(!data.username){
+      console.error("Session tidak mengandung username");
+      location.href = "/login/index.html";
+      return;
+    }
+
+    currentUser = data.username;
+
+    // setelah user pasti ada, baru load file
+    loadFiles();
+
   } catch (e) {
     location.href = "/login/index.html";
   }
@@ -153,7 +165,7 @@ async function loadFiles(){
 
 /* RENDER TABLE */
 function render(){
-  if(!currentUser) return setTimeout(render, 100); // tunggu currentUser terisi
+  if(!currentUser) return setTimeout(render, 100);
   let sorted = [...files];
   const type = filter.value;
   if(type==="newest") sorted.sort((a,b)=>new Date(b.created)-new Date(a.created));
@@ -163,7 +175,7 @@ function render(){
 
   table.innerHTML="";
   sorted.forEach(file=>{
-    const url = `${location.origin}/downloads/?user=${encodeURIComponent(currentUser)}&file=${encodeURIComponent(file.name)}`; // pakai username=
+    const url = `${location.origin}/downloads/?user=${encodeURIComponent(currentUser)}&file=${encodeURIComponent(file.name)}`;
     const row = document.createElement("tr");
     row.innerHTML=`
       <td>${file.name}</td>
@@ -176,14 +188,13 @@ function render(){
   });
 }
 
-/* EVENT DELEGATION UNTUK COPY, EDIT, DELETE */
+/* EVENT DELEGATION */
 table.addEventListener("click", (e) => {
   const fileName = e.target.dataset.file;
   if(!fileName) return;
 
   if(e.target.classList.contains("btn-copy")){
     if(!currentUser) return showToast("User belum terdeteksi!");
-    // URL FIXED
     const url = `https://domain.com/downloads/?username=${encodeURIComponent(currentUser)}&file=${encodeURIComponent(fileName)}`;
     navigator.clipboard.writeText(url)
       .then(() => showToast("Link berhasil dicopy!"))
@@ -211,7 +222,7 @@ async function deleteFile(name){
 
 /* RENAME FILE */
 async function renameFile(oldName){
-  const nameOnly = oldName.replace(/\.[^/.]+$/, ""); // tampilkan tanpa ekstensi
+  const nameOnly = oldName.replace(/\.[^/.]+$/, "");
 
   showModal("Edit Nama File", nameOnly, async (newName)=>{
     newName = newName.trim();
@@ -227,7 +238,7 @@ async function renameFile(oldName){
       const result = await res.json();
       if(result.success){
         const idx = files.findIndex(f => f.name === oldName);
-        if(idx>=0) files[idx].name = newName + oldName.substring(oldName.lastIndexOf(".")); // update di table dengan ekstensi
+        if(idx>=0) files[idx].name = newName + oldName.substring(oldName.lastIndexOf("."));
         render();
         showToast("Renamed!");
       } else {
@@ -242,6 +253,3 @@ async function renameFile(oldName){
 
 /* FILTER CHANGE */
 filter.addEventListener("change", render);
-
-/* INITIAL LOAD */
-loadFiles();
