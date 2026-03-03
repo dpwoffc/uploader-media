@@ -1,7 +1,7 @@
 [
   {
     "username": "user3",
-    "email": "user3@gmail.com",
+    "email": "user@gmail.com",
     "password": "321",
     "role": "user",
     "verified": true,
