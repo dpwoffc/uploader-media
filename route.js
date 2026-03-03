@@ -211,8 +211,9 @@ router.get("/api/check-session",(req,res)=>{
     }
 
     res.json({
-        logged:true,
-        role: admin ? "admin":"user"
+        logged: true,
+        role: admin ? "admin" : "user",
+        username: admin ? admin.username : user.username
     });
 
 });
