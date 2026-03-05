@@ -32,13 +32,17 @@ form.addEventListener("submit", async (e) => {
     }
 
     savedEmail = email;
+
     form.style.display = "none";
     otpSection.style.display = "block";
+
     startCooldown();
+
     alert("OTP dikirim ke email kamu");
 });
 
 verifyBtn.addEventListener("click", async () => {
+
     const otp = document.getElementById("otpInput").value.trim();
 
     if (!otp) {
@@ -61,20 +65,59 @@ verifyBtn.addEventListener("click", async () => {
 
     alert("Register berhasil");
     window.location.href = "/login/index.html";
+
 });
 
+
+resendBtn.addEventListener("click", async () => {
+
+    if (!savedEmail) {
+        alert("Email tidak ditemukan");
+        return;
+    }
+
+    const res = await fetch("/api/resend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: savedEmail })
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+        alert(data.message);
+        return;
+    }
+
+    alert("OTP baru berhasil dikirim");
+
+    startCooldown();
+
+});
+
+
 function startCooldown() {
+
     let countdown = 60;
+
     resendBtn.disabled = true;
 
     countdownInterval = setInterval(() => {
+
         countdown--;
+
         resendBtn.textContent = `Kirim ulang (${countdown})`;
 
         if (countdown <= 0) {
+
             clearInterval(countdownInterval);
+
             resendBtn.disabled = false;
+
             resendBtn.textContent = "Kirim ulang OTP";
+
         }
+
     }, 1000);
+
 }
