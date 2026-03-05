@@ -127,6 +127,39 @@ router.post("/api/register", async (req, res) => {
 
 });
 
+router.post("/api/resend", async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.json({ success:false, message:"Email wajib diisi" });
+    }
+
+    if (!email.endsWith("@gmail.com")) {
+        return res.json({ success:false, message:"Email harus Gmail" });
+    }
+
+    const data = otpStore[email];
+
+    if (!data) {
+        return res.json({ 
+            success:false, 
+            message:"OTP tidak ditemukan, silakan register ulang"
+        });
+    }
+
+    const otp = Math.floor(100000 + Math.random()*900000);
+
+    otpStore[email].otp = otp;
+
+    await transporter.sendMail({
+        to: email,
+        subject: "OTP Verification",
+        html: `Kode OTP baru: <b>${otp}</b>`
+    });
+
+    res.json({ success:true });
+});
+
 router.post("/api/verify-otp", (req,res)=>{
     const { email, otp } = req.body;
     if (!otpStore[email] || otpStore[email].otp != otp) {
@@ -354,10 +387,6 @@ message:err.message
 }
 
 });
-
-/* =========================
-   GET USER FILES
-========================= */
 
 router.get("/api/files",(req,res)=>{
 
