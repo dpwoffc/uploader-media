@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#ffffff;
+  overflow:hidden;
+}
+
+body::before{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#ffffff;
+  border-radius:50%;
+  filter:blur(150px);
+  top:-100px;
+  left:-100px;
+  opacity:.5;
+}
+
+body::after{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#ffffff;
+  border-radius:50%;
+  filter:blur(150px);
+  bottom:-100px;
+  right:-100px;
+  opacity:.6;
+}
+
+.glass-container{
+  position:relative;
+  width:100%;
+  max-width:400px;
+  padding:40px 30px;
+  border-radius:20px;
+  backdrop-filter:blur(25px);
+  background:rgba(255,255,255,0.25);
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+  border:1px solid rgba(255,255,255,0.3);
+}
+
+.glass-container h2{
+  text-align:center;
+  margin-bottom:30px;
+  color:#0d6efd;
+  font-weight:600;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+.input-group input{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  outline:none;
+  background:skyblue;
+  font-size:14px;
+  transition:.3s;
+}
+
+.input-group input:focus{
+  background:white;
+  box-shadow:0 0 0 2px #0d6efd;
+}
+
+.btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:#0d6efd;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#084298;
+  transform:translateY(-2px);
+}
+
+.link{
+  text-align:center;
+  margin-top:18px;
+  font-size:14px;
+}
+
+.link a{
+  text-decoration:none;
+  color:#0d6efd;
+  font-weight:600;
+}
+
+@media(max-width:500px){
+  .glass-container{
+    margin:20px;
+    padding:30px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glass-container">
+  <h2>RESET PASSWORD</h2>
+  <form>
+    <div class="input-group">
+      <input type="email" placeholder="Email" required>
+    </div>
+    <button type="submit" class="btn">Reset</button>
+  </form>
+  <div class="link">
+    back to login??<a href="../login/index.html">Login</a>
+    Don't have account? <a href="../reg/index.html">Register</a>
+  </div>
+  <div class="link">
+    Back to Home <a href="../index.html">Home</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+(async ()=>{
+  const res = await fetch("/api/reset-pass");
+  const data = await res.json();
+})();
+</script>
+</body>
+</html>
