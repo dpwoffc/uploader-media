@@ -1,0 +1,27 @@
+{
+  "name": "media uploading website",
+  "version": "1.0.0",
+  "description": "Media Uploading Website",
+  "main": "index.js",
+  "scripts": {
+    "start": "node handler.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "@dpwoffc",
+  "license": "ISC",
+  "dependencies": {
+    "@lottiefiles/dotlottie-web": "^0.65.0",
+    "@vkazee/baileys": "^1.0.3",
+    "cookie-parser": "^1.4.7",
+    "dropbox": "^10.34.0",
+    "express": "^5.2.1",
+    "jimp": "^0.16.13",
+    "multer": "^2.0.2",
+    "nodemailer": "^8.0.1",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

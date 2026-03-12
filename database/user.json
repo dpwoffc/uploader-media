@@ -1,0 +1,35 @@
+[
+  {
+    "username": "zlljlp",
+    "email": "mjching83@gmail.com",
+    "password": "Memek12",
+    "role": "user",
+    "verified": true,
+    "A2FA": "",
+    "profiePath": "./database/profie/zlljlp",
+    "uploadsPath": "./public/database/zlljlp",
+    "cookies": "a9b6a0c0-b2bf-4a5f-abcc-09862961e60e"
+  },
+  {
+    "username": "Tanaka",
+    "email": "tanakamitsu1009@gmail.com",
+    "password": "1234",
+    "role": "user",
+    "verified": true,
+    "A2FA": "",
+    "profiePath": "./database/profie/Tanaka",
+    "uploadsPath": "./public/database/Tanaka",
+    "cookies": "5127218d-a465-4b7f-80b5-f07a13ce97e8"
+  },
+  {
+    "username": "user",
+    "email": "dwiputrawibowo2009@gmail.com",
+    "password": "dpwoffc",
+    "role": "user",
+    "verified": true,
+    "A2FA": "",
+    "profiePath": "./profile/user.jpg",
+    "uploadsPath": "./public/database/user",
+    "cookies": "bb02005a-5d45-4db6-963c-c61508176e83"
+  }
+]

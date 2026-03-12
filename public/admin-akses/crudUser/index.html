@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI',sans-serif;
+      }
+
+      body{
+        display:flex;
+        min-height:100vh;
+        background:#f4f7ff;
+      }
+
+      .sidebar{
+        width:250px;
+        background:#0d6efd;
+        color:white;
+        padding:25px 20px;
+        transition:0.3s ease;
+      }
+
+      .sidebar h2{
+        margin-bottom:30px;
+      }
+
+      .sidebar ul{
+        list-style:none;
+      }
+
+      .sidebar ul li{
+        margin-bottom:18px;
+      }
+
+      .sidebar ul li a{
+        text-decoration:none;
+        color:white;
+        display:block;
+        padding:10px;
+        border-radius:8px;
+        transition:0.2s;
+      }
+
+      .sidebar ul li a:hover{
+        background:rgba(255,255,255,0.2);
+      }
+
+      .main{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+      }
+
+      .header{
+        background:#0d6efd;
+        color:white;
+        padding:15px 25px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+
+      .hamburger{
+        font-size:22px;
+        cursor:pointer;
+        display:none;
+      }
+
+      .content{
+        flex:1;
+        padding:30px;
+        background:white;
+      }
+
+      .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+        gap:20px;
+      }
+
+      .card{
+        background:white;
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.08);
+      }
+
+      .overlay{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.3);
+        display:none;
+        z-index:900;
+      }
+
+      @media(max-width:768px){
+
+        .sidebar{
+          position:fixed;
+          left:-260px;
+          top:0;
+          height:100%;
+          z-index:1000;
+        }
+
+        .sidebar.active{
+          left:0;
+        }
+
+        .hamburger{
+          display:block;
+        }
+
+        .overlay.active{
+          display:block;
+        }
+
+      }
+
+      .title-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+      }
+
+      .product-table{
+        width:100%;
+        border-collapse:collapse;
+      }
+
+      .product-table th,
+      .product-table td{
+        padding:12px;
+        border-bottom:1px solid #eee;
+      }
+
+      .btn-add{
+        background:#198754;
+        color:white;
+        border:none;
+        padding:8px 16px;
+        border-radius:8px;
+        cursor:pointer;
+      }
+
+      .btn-edit{
+        background:#ffc107;
+        border:none;
+        padding:6px 12px;
+        border-radius:6px;
+        cursor:pointer;
+      }
+
+      .btn-delete{
+        background:#dc3545;
+        color:white;
+        border:none;
+        padding:6px 12px;
+        border-radius:6px;
+        cursor:pointer;
+        margin-left:6px;
+      }
+
+      .product-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        word-wrap: break-word; 
+      }
+
+      .product-table th,
+      .product-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      .product-table th {
+        background: #f1f1f1;
+      }
+
+      .btn-edit,
+      .btn-delete {
+        width: 100%;
+        padding: 6px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 0;
+        display: block;
+        box-sizing: border-box;
+      }
+
+      .btn-edit {
+        background: #ffc107;
+        border: none;
+      }
+
+      .btn-delete {
+        background: #dc3545;
+        color: white;
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="sidebar" id="sidebar">
+      <h2>ADMIN</h2>
+      <ul>
+        <li><a href="../index.html" class="menu-link">Dashboard</a></li>
+        <li><a href="#" class="menu-link">CRUD</a></li>
+        <li><a href="#" id="logoutBtn" class="menu-link">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <div class="hamburger" id="hamburger">☰</div>
+        <h2>ADMIN CRUD</h2>
+      </div>
+
+      <div class="content">
+        <div class="card">
+          <table class="product-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
